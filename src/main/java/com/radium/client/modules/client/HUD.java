@@ -655,13 +655,13 @@ public class HUD extends Module {
         String WatermarkText = "";
         switch (watermark.getValue()) {
             case WatermarkStyle.LOWERCASE:
-                WatermarkText = "radium";
+                WatermarkText = "radium open sourced by sakuracheats.com";
                 break;
             case WatermarkStyle.UPPERCASE:
-                WatermarkText = "RADIUM";
+                WatermarkText = "RADIUM OPEN SRC BY SAKURACHEATS.COM";
                 break;
             default:
-                WatermarkText = "Radium";
+                WatermarkText = "Radium Open Sourced By Sakuracheats.com";
                 break;
         }
 
