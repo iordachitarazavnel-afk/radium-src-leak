@@ -1,31 +1,39 @@
 name: Build JAR
 
+# Rulează la push sau pull request pe branch-ul main
 on:
   push:
-    branches:
-      - main  # sau branch-ul tău principal
+    branches: [ "main" ]
   pull_request:
+    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v3
+      # 1️⃣ Checkout cod
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        distribution: temurin
-        java-version: 17
+      # 2️⃣ Set up Java 17
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
 
-    - name: Build with Gradle
-      run: ./gradlew build
+      # 3️⃣ Grant execute permisiune pentru gradlew
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
 
-    - name: Upload JAR
-      uses: actions/upload-artifact@v3
-      with:
-        name: my-built-jar
-        path: build/libs/*.jar  # aici trebuie să fie calea exactă către .jar-ul tău
+      # 4️⃣ Build shadow/fat jar
+      - name: Build Shadow JAR
+        run: ./gradlew clean shadowJar
 
+      # 5️⃣ Upload JAR ca artifact (ultima versiune v4)
+      - name: Upload Shadow JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-shadow-jar
+          path: build/libs/*-all.jar
