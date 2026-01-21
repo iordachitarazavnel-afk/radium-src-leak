@@ -1,6 +1,5 @@
 name: Build Fabric Mod JAR
 
-# Rulează la push sau pull request pe branch-ul main
 on:
   push:
     branches: [ "main" ]
@@ -27,13 +26,13 @@ jobs:
       - name: Grant execute permission
         run: chmod +x ./gradlew
 
-      # 4️⃣ Build mod cu Loom
+      # 4️⃣ Build mod + remap JAR
       - name: Build Mod
-        run: ./gradlew clean build
+        run: ./gradlew clean build remapJar
 
-      # 5️⃣ Upload artifact – caută automat JAR remapat
-      - name: Upload remapped JAR
+      # 5️⃣ Upload artifact – orice jar generat în build/libs/
+      - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
         with:
           name: fabric-mod-jar
-          path: build/libs/*-remapped.jar
+          path: build/libs/*.jar
