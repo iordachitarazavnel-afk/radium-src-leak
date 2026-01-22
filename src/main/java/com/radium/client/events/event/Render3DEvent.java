@@ -1,21 +1,14 @@
 package com.radium.client.events.event;
 
-import com.radium.client.events.Event;
-import com.radium.client.events.Listener;
-import net.minecraft.client.gui.DrawContext;
-
+import net.minecraft.client.util.math.MatrixStack;
 import java.util.ArrayList;
 
 public class Render3DEvent extends Event<Render3DEvent.Render3DListener> {
 
-    private final DrawContext drawContext;
+    public final MatrixStack matrixStack;
 
-    public Render3DEvent(DrawContext drawContext) {
-        this.drawContext = drawContext;
-    }
-
-    public DrawContext getDrawContext() {
-        return drawContext;
+    public Render3DEvent(MatrixStack matrixStack) {
+        this.matrixStack = matrixStack;
     }
 
     @Override
