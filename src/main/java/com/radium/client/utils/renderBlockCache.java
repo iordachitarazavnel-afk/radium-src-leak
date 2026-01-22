@@ -1,39 +1,54 @@
-public static void renderBlockCache(class_4587 matrices,
-                                    ConcurrentHashMap<Long, Set<class_2338>> cache,
-                                    Color color) {
-    MinecraftClient mc = MinecraftClient.getInstance();
-    if (mc.player == null) return;
+package com.radium.client.utils;
 
-    double playerX = mc.player.getX();
-    double playerY = mc.player.getEyeY(); // pentru tracers
-    double playerZ = mc.player.getZ();
+import net.minecraft.class_2338;
+import net.minecraft.class_4587;
 
-    for (Set<class_2338> blockSet : cache.values()) {
-        if (blockSet == null) continue;
+import java.awt.Color;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
-        for (class_2338 blockPos : blockSet) {
-            if (blockPos == null) continue;
+public final class RenderUtils {
 
-            // Calcul coordonate relative la jucător
-            float x1 = (float) (blockPos.method_10263() - playerX + 0.1);
-            float y1 = (float) (blockPos.method_10264() - playerY + 0.05);
-            float z1 = (float) (blockPos.method_10260() - playerZ + 0.1);
+    private RenderUtils() {} // prevent instantiation
 
-            float x2 = (float) (blockPos.method_10263() - playerX + 0.9);
-            float y2 = (float) (blockPos.method_10264() - playerY + 0.85);
-            float z2 = (float) (blockPos.method_10260() - playerZ + 0.9);
+    /**
+     * Renderizează block cache pentru SuspiciousESP
+     *
+     * @param matrices matricele de render (MatrixStack)
+     * @param blockCache cache-ul de blockuri, key = chunk long, value = set de block positions
+     * @param color culoarea pentru blockuri
+     */
+    public static void renderBlockCache(class_4587 matrices,
+                                        ConcurrentHashMap<Long, Set<class_2338>> blockCache,
+                                        Color color) {
+        if (matrices == null || blockCache == null || color == null) return;
 
-            // Render cub ESP
-            renderFilledBox(matrices, x1, y1, z1, x2, y2, z2, color);
+        blockCache.values().forEach(blockSet -> {
+            for (class_2338 pos : blockSet) {
+                if (pos != null) {
+                    float r = color.getRed() / 255f;
+                    float g = color.getGreen() / 255f;
+                    float b = color.getBlue() / 255f;
+                    float a = color.getAlpha() / 255f;
 
-            // Render tracers dacă e activat
-            if (SuspiciousEsp.getInstance().tracers.getValue()) {
-                renderLine(matrices, new Color(color.getRed(), color.getGreen(), color.getBlue(), 255),
-                        new class_243(playerX, playerY, playerZ),
-                        new class_243(blockPos.method_10263() + 0.5,
-                                      blockPos.method_10264() + 0.5,
-                                      blockPos.method_10260() + 0.5));
+                    // Aici poți folosi metoda ta de render (cub, bounding box etc.)
+                    // Exemplu simplificat (trebuie să implementezi cubul sau bounding box-ul)
+                    RenderUtils.renderBox(matrices, pos, r, g, b, a);
+                }
             }
-        }
+        });
+    }
+
+    /**
+     * Metodă helper pentru a desena un cub la poziția block-ului
+     * Trebuie să înlocuiești cu implementarea ta de bounding box
+     */
+    private static void renderBox(class_4587 matrices, class_2338 pos, float r, float g, float b, float a) {
+        // codul tău de OpenGL/RenderSystem aici
+        // de exemplu:
+        // GlStateManager.pushMatrix();
+        // GlStateManager.translate(pos.method_10263(), pos.method_10264(), pos.method_10260());
+        // drawCube(r, g, b, a);
+        // GlStateManager.popMatrix();
     }
 }
