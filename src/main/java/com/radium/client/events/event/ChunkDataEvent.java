@@ -1,34 +1,22 @@
 package com.radium.client.events.event;
 
-import com.radium.client.client.RadiumClient;
 import com.radium.client.events.CancellableEvent;
-import com.radium.client.events.Listener;
-import net.minecraft.network.packet.s2c.play.ChunkDataS2CPacket;
-import net.minecraft.world.chunk.WorldChunk;
-
-import java.util.ArrayList;
+import net.minecraft.world.chunk.Chunk;
 
 public class ChunkDataEvent extends CancellableEvent<ChunkDataEvent.ChunkListener> {
 
-    private final ChunkDataS2CPacket packet;
+    private final Chunk chunk;
 
-    public ChunkDataEvent(ChunkDataS2CPacket packet) {
-        this.packet = packet;
+    public ChunkDataEvent(Chunk chunk) {
+        this.chunk = chunk;
     }
 
-    public ChunkDataS2CPacket getPacket() {
-        return packet;
+    public Chunk getChunk() {
+        return chunk;
     }
-
-    public WorldChunk getChunk() {
-        if (RadiumClient.mc.world == null) return null;
-        return RadiumClient.mc.world.getChunk(packet.getChunkX(), packet.getChunkZ());
-    }
-
-    /* ================= EVENT SYSTEM ================= */
 
     @Override
-    public void fire(ArrayList<ChunkListener> listeners) {
+    public void fire(java.util.ArrayList<ChunkListener> listeners) {
         for (ChunkListener listener : listeners) {
             listener.onChunkData(this);
         }
@@ -39,7 +27,7 @@ public class ChunkDataEvent extends CancellableEvent<ChunkDataEvent.ChunkListene
         return ChunkListener.class;
     }
 
-    public interface ChunkListener extends Listener {
+    public interface ChunkListener extends com.radium.client.events.Listener {
         void onChunkData(ChunkDataEvent event);
     }
 }
