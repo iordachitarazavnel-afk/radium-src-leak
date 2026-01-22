@@ -1,4 +1,4 @@
-package package com.radium.client.events
+package  com.radium.client.events.event;
 
 public abstract class CancellableEvent implements Event {
    private boolean cancelled = false;
