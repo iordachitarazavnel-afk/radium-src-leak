@@ -1,4 +1,4 @@
-package com.radium.client.events;
+package com.radium.client.events.event;
 
 import java.lang.annotation.*;
 
