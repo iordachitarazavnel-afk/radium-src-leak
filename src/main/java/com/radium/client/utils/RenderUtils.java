@@ -1,10 +1,13 @@
 package com.radium.client.utils;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.WorldRenderer;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.render.MatrixStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.chunk.Chunk;
+import net.minecraft.block.BlockState;
 
 import java.awt.Color;
 import java.util.Set;
@@ -18,58 +21,61 @@ public final class RenderUtils {
 
     private RenderUtils() {} // prevent instantiation
 
-    // Renderizează block cache pentru SuspiciousESP
+    // Render a filled box at given coordinates
+    public static void renderFilledBox(MatrixStack matrices,
+                                       float x1, float y1, float z1,
+                                       float x2, float y2, float z2,
+                                       Color color) {
+        // Implementarea reală depinde de RenderSystem / VertexConsumer
+        // Placeholder:
+        // System.out.println("Render box: " + x1 + "," + y1 + "," + z1);
+    }
+
+    // Render a line between two points
+    public static void renderLine(MatrixStack matrices, Color color, Vec3 start, Vec3 end) {
+        // Placeholder: folosește RenderSystem / VertexConsumer
+    }
+
+    // Render all blocks from a cache
     public static void renderBlockCache(MatrixStack matrices,
                                         ConcurrentHashMap<Long, Set<BlockPos>> blockCache,
                                         Color color) {
         if (matrices == null || blockCache == null || color == null) return;
 
-        for (Set<BlockPos> blockSet : blockCache.values()) {
-            if (blockSet == null) continue;
-
+        blockCache.values().forEach(blockSet -> {
             for (BlockPos pos : blockSet) {
-                if (pos == null) continue;
-
-                float r = color.getRed() / 255f;
-                float g = color.getGreen() / 255f;
-                float b = color.getBlue() / 255f;
-                float a = color.getAlpha() / 255f;
-
-                renderBox(matrices, pos, r, g, b, a);
-
-                // Tracers către player
-                if (SuspiciousEsp.getInstance().tracers.getValue() && mc.player != null) {
-                    renderLine(matrices,
-                            new Color(color.getRed(), color.getGreen(), color.getBlue(), 255),
-                            mc.player.getPos(),
-                            pos.toCenterPos());
+                if (pos != null) {
+                    renderBox(matrices, pos, color.getRed() / 255f,
+                            color.getGreen() / 255f, color.getBlue() / 255f,
+                            color.getAlpha() / 255f);
                 }
             }
-        }
+        });
     }
 
-    // Placeholder pentru cub (bounding box)
+    // Render a single block at position
     private static void renderBox(MatrixStack matrices, BlockPos pos, float r, float g, float b, float a) {
-        // Aici pui codul de rendering OpenGL/RenderSystem
+        // Placeholder: folosește metoda ta de bounding box sau cub OpenGL
+        // ex: GlStateManager.pushMatrix(); GlStateManager.translate(...); drawCube(); GlStateManager.popMatrix();
     }
 
-    // Placeholder pentru linie
-    private static void renderLine(MatrixStack matrices, Color color, net.minecraft.util.math.Vec3d start, BlockPos end) {
-        // Aici pui codul de rendering linie
-    }
-
-    // Camera position
-    public static net.minecraft.util.math.Vec3d getCameraPos() {
+    // Returns camera position
+    public static Vec3 getCameraPos() {
         if (mc.player != null) {
-            return mc.player.getCameraPosVec(1.0F);
+            return new Vec3(mc.player.getX(), mc.player.getEyeY(), mc.player.getZ());
         }
-        return new net.minecraft.util.math.Vec3d(0, 0, 0);
+        return new Vec3(0, 0, 0);
     }
 
-    public static net.minecraft.client.render.Camera getCamera() {
-        if (mc.gameRenderer != null) {
-            return mc.gameRenderer.getCamera();
-        }
+    // Returns Camera object
+    public static Camera getCamera() {
+        if (mc.gameRenderer != null) return mc.gameRenderer.getCamera();
         return null;
+    }
+
+    // Simple 3D vector class
+    public static class Vec3 {
+        public final double x, y, z;
+        public Vec3(double x, double y, double z) { this.x = x; this.y = y; this.z = z; }
     }
 }
