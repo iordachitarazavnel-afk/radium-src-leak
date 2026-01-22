@@ -1,6 +1,6 @@
-package com.radium.client.modules.setting;
+package com.radium.client.gui.setting;
 
-import com.radium.client.gui.settings.Setting;
+import com.radium.client.gui.settings;
 
 public class BooleanSetting extends Setting<Boolean> {
 
