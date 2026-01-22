@@ -1,12 +1,18 @@
-package com.radium.client.gui.settings;
-// radium client
+package com.radium.client.modules.setting;
 
-public class BooleanSetting extends Setting<Boolean> {
-    public BooleanSetting(String name, Boolean defaultValue) {
-        super(name, defaultValue);
+public class BooleanSetting extends Setting {
+    private boolean value;
+
+    public BooleanSetting(String name, boolean defaultValue) {
+        super(name);
+        this.value = defaultValue;
     }
 
-    public void toggle() {
-        setValue(!getValue());
+    public boolean getValue() {
+        return value;
+    }
+
+    public void setValue(boolean value) {
+        this.value = value;
     }
 }
