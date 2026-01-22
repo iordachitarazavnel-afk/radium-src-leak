@@ -1,18 +1,21 @@
-package com.radium.client.events.event;
+package com.radium.client.events.event.events;
 
 import com.radium.client.events.Event;
 import com.radium.client.events.Listener;
-import net.minecraft.world.entity.LivingEntity; // Yarn mapping corect
+
+import net.minecraft.entity.Entity;
+
 import java.util.ArrayList;
 
 public class AttackEvent extends Event<AttackEvent.AttackListener> {
-    private final LivingEntity target;
 
-    public AttackEvent(LivingEntity target) {
+    private final Entity target;
+
+    public AttackEvent(Entity target) {
         this.target = target;
     }
 
-    public LivingEntity getTarget() {
+    public Entity getTarget() {
         return target;
     }
 
