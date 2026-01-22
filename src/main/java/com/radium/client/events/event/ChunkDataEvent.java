@@ -1,14 +1,19 @@
-import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.World;
+package com.radium.client.events.event;
 
-public class ChunkDataEvent {
-    private final Chunk chunk;
+import java.util.ArrayList;
 
-    public ChunkDataEvent(Chunk chunk) {
-        this.chunk = chunk;
+public class ChunkDataEvent extends Event<ChunkDataEvent.ChunkListener> {
+    @Override
+    public void fire(ArrayList<ChunkListener> listeners) {
+        for (ChunkListener listener : listeners) listener.onChunkData(this);
     }
 
-    public Chunk getChunk() {
-        return chunk;
+    @Override
+    public Class<ChunkListener> getListenerType() {
+        return ChunkListener.class;
+    }
+
+    public interface ChunkListener extends Listener {
+        void onChunkData(ChunkDataEvent event);
     }
 }
