@@ -2,28 +2,15 @@ package com.radium.client.gui.settings;
 
 public class BooleanSetting extends Setting<Boolean> {
 
-    private boolean value;
-
     public BooleanSetting(String name, boolean defaultValue) {
-        super(name);
-        this.value = defaultValue;
+        super(name, defaultValue);
     }
 
-    @Override
-    public Boolean getValue() {
-        return value;
+    public boolean getBoolean() {
+        return getValue();
     }
 
-    @Override
-    public void setValue(Boolean value) {
-        this.value = value;
-    }
-
-    public boolean getBooleanValue() {
-        return value;
-    }
-
-    public void setBooleanValue(boolean value) {
-        this.value = value;
+    public void setBoolean(boolean value) {
+        setValue(value);
     }
 }
