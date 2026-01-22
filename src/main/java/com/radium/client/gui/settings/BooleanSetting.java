@@ -1,27 +1,15 @@
-package com.radium.client.gui.settings;
+package com.radium.client.modules.setting;
 
-public class BooleanSetting {
-    private final String name;
-    private boolean enabled;
-
+public class BooleanSetting extends Setting<Boolean> {
     public BooleanSetting(String name, boolean defaultValue) {
-        this.name = name;
-        this.enabled = defaultValue;
+        super(name, defaultValue);
     }
 
-    public String getName() {
-        return name;
+    public void setValue(boolean value) {
+        this.value = value;
     }
 
     public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public void toggle() {
-        this.enabled = !this.enabled;
+        return value;
     }
 }
