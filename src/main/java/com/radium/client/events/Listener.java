@@ -1,8 +1,3 @@
-package com.radium.client.events;
-// radium client
+package com.radium.client.events.event;
 
-import java.util.EventListener;
-
-public interface Listener extends EventListener {
-}
-
+public interface Listener { }
