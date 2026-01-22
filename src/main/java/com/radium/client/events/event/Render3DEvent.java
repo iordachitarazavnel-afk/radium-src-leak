@@ -1,12 +1,16 @@
 package com.radium.client.events.event;
 
+import com.radium.client.events.Event;
+import com.radium.client.events.Listener;
+import net.minecraft.client.util.math.MatrixStack;
+
 import java.util.ArrayList;
-import net.minecraft.class_4587; // MatrixStack
 
 public class Render3DEvent extends Event<Render3DEvent.Render3DListener> {
-    public final class_4587 matrixStack;
 
-    public Render3DEvent(class_4587 matrixStack) {
+    public final MatrixStack matrixStack;
+
+    public Render3DEvent(MatrixStack matrixStack) {
         this.matrixStack = matrixStack;
     }
 
@@ -24,5 +28,3 @@ public class Render3DEvent extends Event<Render3DEvent.Render3DListener> {
         void onRender3D(Render3DEvent event);
     }
 }
-
-
