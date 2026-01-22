@@ -1,4 +1,4 @@
-package com.radium.client.events.event.events;
+package com.radium.client.events.event;
 
 import com.radium.client.events.Event;
 import com.radium.client.events.Listener;
@@ -29,3 +29,4 @@ public class Render3DEvent extends Event<Render3DEvent.Render3DListener> {
         return Render3DListener.class;
     }
 }
+
