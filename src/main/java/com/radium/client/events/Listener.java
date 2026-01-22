@@ -1,3 +1,6 @@
-package com.radium.client.events.event;
+package com.radium.client.events;
 
-public interface Listener { }
+// radium client
+
+public interface Listener {
+}
