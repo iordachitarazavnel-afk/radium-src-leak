@@ -1,43 +1,29 @@
-package com.radium.client.gui.setting;
+package com.radium.client.gui.settings;
 
-import com.radium.client.gui.settings;
+public class NumberSetting {
+    private final String name;
+    private double value;
+    private final double min;
+    private final double max;
+    private final double increment;
 
-public class NumberSetting extends Setting<Double> {
-
-    private final double min, max, step;
-
-    public NumberSetting(String name, double min, double max, double defaultValue, double step) {
-        super(name, defaultValue);
+    public NumberSetting(String name, double defaultValue, double min, double max, double increment) {
+        this.name = name;
+        this.value = defaultValue;
         this.min = min;
         this.max = max;
-        this.step = step;
+        this.increment = increment;
     }
 
-    @Override
-    public Double getValue() {
-        return super.getValue();
+    public String getName() { return name; }
+    public double getValue() { return value; }
+    public void setValue(double value) {
+        if (value < min) this.value = min;
+        else if (value > max) this.value = max;
+        else this.value = value;
     }
 
-    public int getIntValue() {
-        return getValue().intValue();
-    }
-
-    @Override
-    public void setValue(Double value) {
-        if (value < min) value = min;
-        else if (value > max) value = max;
-        super.setValue(value);
-    }
-
-    public double getMin() {
-        return min;
-    }
-
-    public double getMax() {
-        return max;
-    }
-
-    public double getStep() {
-        return step;
-    }
+    public double getMin() { return min; }
+    public double getMax() { return max; }
+    public double getIncrement() { return increment; }
 }
