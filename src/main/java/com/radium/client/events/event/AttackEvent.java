@@ -1,4 +1,4 @@
-package com.radium.client.events.event.events;
+package com.radium.client.events.event;
 
 import com.radium.client.events.Event;
 import com.radium.client.events.Listener;
