@@ -231,7 +231,9 @@ public final class RadiumClient {
             moduleManager.register(new Baltagger());
             moduleManager.register(new AutoTPA());
             moduleManager.register(new MaceSwap());
-            moduleManager.register(new SuspiciousEsp());
+            moduleManager.register(new SuspiciousESP());
+
+           
              
             
             moduleManager.register(new ChatUtils());
