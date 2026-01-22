@@ -230,7 +230,10 @@ public final class RadiumClient {
             moduleManager.register(new AutoDoubleHand());
             moduleManager.register(new Baltagger());
             moduleManager.register(new AutoTPA());
-
+            moduleManager.register(new MaceSwap());
+            moduleManager.register(new SuspiciousEsp());
+             
+            
             moduleManager.register(new ChatUtils());
             moduleManager.register(new Compass());
             moduleManager.register(new SeeThroughWalls());
