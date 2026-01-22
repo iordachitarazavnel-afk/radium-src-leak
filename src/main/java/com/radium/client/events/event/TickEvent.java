@@ -1,16 +1,13 @@
 package com.radium.client.events.event;
 
 import com.radium.client.events.CancellableEvent;
-import com.radium.client.events.Listener;
-
-import java.util.ArrayList;
 
 public class TickEvent extends CancellableEvent<TickEvent.TickListener> {
 
     @Override
-    public void fire(ArrayList<TickListener> listeners) {
-        for (TickListener l : listeners) {
-            l.onTick(this);
+    public void fire(java.util.ArrayList<TickListener> listeners) {
+        for (TickListener listener : listeners) {
+            listener.onTick(this);
         }
     }
 
@@ -19,7 +16,7 @@ public class TickEvent extends CancellableEvent<TickEvent.TickListener> {
         return TickListener.class;
     }
 
-    public interface TickListener extends Listener {
+    public interface TickListener extends com.radium.client.events.Listener {
         void onTick(TickEvent event);
     }
 }
