@@ -1,7 +1,17 @@
-package com.radium.client.events;
+package com.radium.client.events.event;
 
-import java.lang.annotation.*;
+public class TickEvent extends Event<TickEvent.TickListener> {
+    @Override
+    public void fire(ArrayList<TickListener> listeners) {
+        for (TickListener listener : listeners) listener.onTick(this);
+    }
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
-public @interface EventListener { }
+    @Override
+    public Class<TickListener> getListenerType() {
+        return TickListener.class;
+    }
+
+    public interface TickListener extends Listener {
+        void onTick(TickEvent event);
+    }
+}
