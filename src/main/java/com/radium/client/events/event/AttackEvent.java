@@ -4,7 +4,7 @@ import com.radium.client.events.CancellableEvent;
 
 public class AttackEvent extends CancellableEvent<AttackEvent.AttackListener> {
 
-    public AttackEvent() {} // constructor gol
+    public AttackEvent() {}
 
     @Override
     public Class<AttackListener> getListenerType() {
