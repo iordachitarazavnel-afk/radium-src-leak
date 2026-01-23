@@ -5,7 +5,7 @@ import com.radium.client.gui.settings.BooleanSetting;
 import com.radium.client.gui.settings.NumberSetting;
 import com.radium.client.gui.settings.Setting;
 import com.radium.client.modules.Module;
-import com.radium.client.utils.RenderUtils;
+import com.radium.client.utils.RenderUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
