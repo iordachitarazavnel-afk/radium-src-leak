@@ -20,11 +20,16 @@ public class Render3DEvent extends CancellableEvent {
         return matrixStack;
     }
 
-    public Matrix4f getMatrix4f() {
-        return matrix4f;
-    }
-
     public float getTickDelta() {
         return tickDelta;
+    }
+
+    @Override
+    public Class<?> getListenerType() {
+        return Render3DListener.class;
+    }
+
+    public interface Render3DListener {
+        void onRender3D(Render3DEvent event);
     }
 }
