@@ -1,26 +1,24 @@
 package com.radium.client.events.event;
 
 import com.radium.client.events.CancellableEvent;
-import net.minecraft.entity.player.PlayerEntity;
+import com.radium.client.events.Listener;
 
-public class AttackEvent extends CancellableEvent {
+public class AttackEvent extends CancellableEvent<AttackEvent.AttackListener> {
 
-    private final PlayerEntity target;
-
-    public AttackEvent(PlayerEntity target) {
-        this.target = target;
-    }
-
-    public PlayerEntity getTarget() {
-        return target;
+    @Override
+    public void fire(java.util.ArrayList<AttackListener> listeners) {
+        for (AttackListener listener : listeners) {
+            listener.onAttack(this);
+            if (isCancelled()) break;
+        }
     }
 
     @Override
-    public Class<?> getListenerType() {
+    public Class<AttackListener> getListenerType() {
         return AttackListener.class;
     }
 
-    public interface AttackListener {
+    public interface AttackListener extends Listener {
         void onAttack(AttackEvent event);
     }
 }
