@@ -3,23 +3,25 @@ package com.radium.client.events.event;
 import com.radium.client.client.RadiumClient;
 import com.radium.client.events.CancellableEvent;
 import com.radium.client.events.Listener;
-import net.minecraft.class_2672; // PacketChunkData
-import net.minecraft.class_2791; // Chunk
+import net.minecraft.world.chunk.Chunk; // Clasa Chunk reală
+import net.minecraft.network.packet.s2c.play.ChunkDataS2CPacket; // Packet real pentru chunk
 
 import java.util.ArrayList;
 
 public class ChunkDataEvent extends CancellableEvent<ChunkDataEvent.ChunkDataListener> {
 
-    public class_2672 packet;
+    public ChunkDataS2CPacket packet; // packet-ul real
 
-    public ChunkDataEvent(class_2672 packet) {
+    public ChunkDataEvent(ChunkDataS2CPacket packet) {
         this.packet = packet;
     }
 
     // Obține chunk-ul din world
-    public class_2791 getChunk() {
-        if (RadiumClient.mc == null || RadiumClient.mc.field_1687 == null) return null;
-        return RadiumClient.mc.field_1687.method_8497(this.packet.method_11523(), this.packet.method_11524());
+    public Chunk getChunk() {
+        if (RadiumClient.mc == null || RadiumClient.mc.world == null) return null;
+        int chunkX = packet.getX(); // metoda reală a packetului
+        int chunkZ = packet.getZ();
+        return RadiumClient.mc.world.getChunk(chunkX, chunkZ);
     }
 
     @Override
@@ -34,7 +36,6 @@ public class ChunkDataEvent extends CancellableEvent<ChunkDataEvent.ChunkDataLis
         return ChunkDataListener.class;
     }
 
-    // Interfața listener pentru acest event
     public interface ChunkDataListener extends Listener {
         void onChunkData(ChunkDataEvent event);
     }
