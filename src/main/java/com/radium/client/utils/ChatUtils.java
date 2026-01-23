@@ -22,9 +22,12 @@ public final class ChatUtils {
         send(buildPrefix() + "§c" + message);
     }
 
-    private static void send(String fullMessage) {
-        if (RadiumClient.mc != null && RadiumClient.mc.player != null) {
-            RadiumClient.mc.player.sendMessage(Text.literal(fullMessage), false);
+   private static void send(String fullMessage) {
+    if (Argon.mc != null && Argon.mc.player != null) {
+        Argon.mc.player.sendMessage(Text.literal(fullMessage), false);
+    }
+}
+;
         }
     }
 
