@@ -2,28 +2,29 @@ package com.radium.client.events.event;
 
 import com.radium.client.events.CancellableEvent;
 import net.minecraft.client.util.math.MatrixStack;
+import org.joml.Matrix4f;
 
-public class Render3DEvent extends CancellableEvent<Render3DEvent.Render3DListener> {
+public class Render3DEvent extends CancellableEvent {
 
-    public final MatrixStack matrixStack;
+    private final MatrixStack matrixStack;
+    private final Matrix4f matrix4f;
+    private final float tickDelta;
 
-    public Render3DEvent(MatrixStack matrixStack) {
+    public Render3DEvent(MatrixStack matrixStack, Matrix4f matrix4f, float tickDelta) {
         this.matrixStack = matrixStack;
+        this.matrix4f = matrix4f;
+        this.tickDelta = tickDelta;
     }
 
-    @Override
-    public void fire(java.util.ArrayList<Render3DListener> listeners) {
-        for (Render3DListener listener : listeners) {
-            listener.onRender3D(this);
-        }
+    public MatrixStack getMatrixStack() {
+        return matrixStack;
     }
 
-    @Override
-    public Class<Render3DListener> getListenerType() {
-        return Render3DListener.class;
+    public Matrix4f getMatrix4f() {
+        return matrix4f;
     }
 
-    public interface Render3DListener extends com.radium.client.events.Listener {
-        void onRender3D(Render3DEvent event);
+    public float getTickDelta() {
+        return tickDelta;
     }
 }
