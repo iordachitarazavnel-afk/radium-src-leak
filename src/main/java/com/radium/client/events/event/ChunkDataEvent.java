@@ -1,7 +1,7 @@
 package com.radium.client.events.event;
 
-import com.radium.client.Radium;
 import com.radium.client.events.CancellableEvent;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.packet.s2c.play.ChunkDataS2CPacket;
 import net.minecraft.world.chunk.WorldChunk;
 
@@ -13,14 +13,10 @@ public class ChunkDataEvent extends CancellableEvent {
         this.packet = packet;
     }
 
-    public ChunkDataS2CPacket getPacket() {
-        return packet;
-    }
-
     public WorldChunk getChunk() {
-        if (Radium.mc.world == null) return null;
+        if (MinecraftClient.getInstance().world == null) return null;
 
-        return Radium.mc.world.getChunk(
+        return MinecraftClient.getInstance().world.getChunk(
                 packet.getChunkX(),
                 packet.getChunkZ()
         );
