@@ -58,7 +58,7 @@ public class SuspiciousESP extends Module {
                 (pillagers.getValue() && entity instanceof PillagerEntity)) {
 
                 Box box = entity.getBoundingBox();
-                RenderUtil.drawBox(event.matrixStack, box, alpha.getValue().intValue());
+              RenderUtil.drawBox(event.matrixStack, box, 1f, 0f, 0f, alpha.getValue().intValue() / 255f);
                 if (tracers.getValue()) {
                     RenderUtil.drawTracer(event.matrixStack, MinecraftClient.getInstance().player.getPos(), entity.getPos(), alpha.getValue().intValue());
                 }
